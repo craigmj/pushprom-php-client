@@ -10,7 +10,7 @@ class Connection
     private $constLabels;
     private $warningLogger;
 
-    public function __construct($url, $constLabels = [], $warningLogger = null)
+    public function __construct($url, $constLabels = array(), $warningLogger = null)
     {
         $this->url           = $url;
         $this->constLabels   = $constLabels;
@@ -19,7 +19,7 @@ class Connection
         $this->host          = parse_url($url, PHP_URL_HOST);
         $this->port          = parse_url($url, PHP_URL_PORT);
 
-        $supportedProtocols = ["http", "https", "udp"];
+        $supportedProtocols = array("http", "https", "udp");
         if (in_array($this->protocol, $supportedProtocols) == false) {
             throw new \Exception(
                 "Protocol " . $this->protocol . " not supported. Valid values are: " . implode(
@@ -31,7 +31,7 @@ class Connection
     }
     private function warning($msg) {
         if ($this->warningLogger != null) {
-            call_user_func_array($this->warningLogger, [$msg]);
+            call_user_func_array($this->warningLogger, array($msg));
         } else {
             error_log($msg);
         }
@@ -78,10 +78,10 @@ class Connection
             curl_setopt(
                 $ch,
                 CURLOPT_HTTPHEADER,
-                [
+                array(
                     'Content-Type: application/json',
                     'Content-Length: ' . $msg_len,
-                ]
+                )
             );
             $response = curl_exec($ch);
             curl_close($ch);

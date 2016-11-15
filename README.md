@@ -2,6 +2,11 @@
 
 This is a PHP client for [Pushprom](https://github.com/messagebird/pushprom). If you use Yii 2 you may want to have a look at the [Yii 2 client](https://github.com/messagebird/pushprom-yii-client).
 
+This fork differes from the original by
+
+1 Including an `include.php` file to include the required files without using Composer et al.
+1 Using `array()` instead of `[]` to work with older PHP versions.
+
 [![Latest Stable Version](https://poser.pugx.org/messagebird/pushprom-php-client/v/stable.svg)](https://packagist.org/packages/messagebird/pushprom-php-client)
 [![License](https://poser.pugx.org/messagebird/pushprom-php-client/license.svg)](https://packagist.org/packages/messagebird/pushprom-php-client)
 
@@ -26,6 +31,10 @@ And then install by running:
 ```bash
 composer update messagebird/pushprom-php-client
 ```
+
+Alternatively, you can simply include the required files with:
+
+```include_once('pushprom-php-client/include.php');```
 
 ## Usage
 

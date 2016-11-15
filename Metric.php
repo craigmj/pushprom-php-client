@@ -10,14 +10,14 @@ class Metric
     protected $labels;
     protected $useUDP;
 
-    function __construct($connection, $name, $help, $labels = [])
+    function __construct($connection, $name, $help, $labels = array())
     {
         $this->connection = $connection;
         $this->name       = $name;
         $this->help       = $help;
         $this->labels     = $labels;
 
-        $allowedConnectionTypes = ['pushprom\yii2\ConnectionProxy', 'pushprom\Connection'];
+        $allowedConnectionTypes = array('pushprom\yii2\ConnectionProxy', 'pushprom\Connection');
         if ($connection == null) {
             throw new \Exception(
                 'The first argument needs to be one of ' . implode(", ", $allowedConnectionTypes) . "."
@@ -33,17 +33,17 @@ class Metric
         }
     }
 
-    function pushDelta($attrs = [])
+    function pushDelta($attrs = array())
     {
         // create new delta based on this metric
         $typeParts = explode('\\', strtolower(get_class($this)));
         $delta     = array_merge(
-            [
+            array(
                 "type" => $typeParts[sizeof($typeParts) - 1],
                 "name" => $this->name,
                 "help" => $this->help,
                 "labels" => $this->labels,
-            ],
+            ),
             $attrs
         );
 
